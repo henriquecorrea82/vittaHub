@@ -7,7 +7,7 @@ Este site reúne os entregáveis do Tech Challenge:
 - Práticas de segurança aplicadas (SAST, dependências, revisão, monitoramento, auditoria, Red/Blue/Purple Team)
 
 ## Links
-- 📌 Pipeline (workflows): https://github.com/SEU_USUARIO/vittahub-devsecops/actions
+- 📌 Pipeline (workflows): https://github.com/henriquecorrea82/vittaHub/actions
 - 📄 Plano de DevSecOps: ./plano-devsecops.md
 - 🛡️ Práticas de segurança aplicadas: ./praticas-seguranca.md
 - 🔁 Pipeline DevSecOps (fluxo visual): ./pipeline-devsecops.md
