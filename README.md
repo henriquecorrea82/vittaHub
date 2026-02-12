@@ -1,2 +1,2 @@
-# vittaHub
+# VittaHub
 VittaHub - Boletins Médicos
