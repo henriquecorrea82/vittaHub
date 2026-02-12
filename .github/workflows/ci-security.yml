@@ -1,0 +1,57 @@
+name: CI + Security (DevSecOps)
+
+on:
+  pull_request:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Exemplo simples (não depende do seu app existir ainda)
+      - name: Setup Node (para exemplo)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install (se houver package.json)
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+          else
+            echo "Sem package.json — pulando instalação."
+          fi
+
+      - name: Run tests (se houver)
+        run: |
+          if [ -f package.json ]; then
+            npm test --if-present
+          else
+            echo "Sem testes configurados — pulando."
+          fi
+
+      # SAST (CodeQL)
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: CodeQL Analyze
+        uses: github/codeql-action/analyze@v3
+
+      # Controle de dependências em PR
+      - name: Dependency Review (PR only)
+        if: github.event_name == 'pull_request'
+        uses: actions/dependency-review-action@v4
